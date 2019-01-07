@@ -3,7 +3,7 @@
   mysql_db:
     name: "{{ wp_single.dbname }}"
     state: present
-  when: wp_single.dbcreate | default(wp_defaults.dbcreate) ==  true
+  when: ( wp_single.dbcreate | default(wp_defaults.dbcreate) )
   tags:
     - database
 
@@ -12,9 +12,9 @@
     name: "{{ wp_single.dbuser }}"
     host: "{{ wp_single.dbhost | default(wp_defaults.dbhost) }}"
     password: "{{ wp_single.dbpass }}"
-    priv: "{{ wp_single.dbname}}.*:ALL"
+    priv: "{{ wp_single.dbname }}.*:ALL"
     state: present
-  when: wp_single.dbcreate | default(wp_defaults.dbcreate) ==  true
+  when: ( wp_single.dbcreate | default(wp_defaults.dbcreate) )
   tags:
     - database
 
