@@ -72,7 +72,7 @@
     --dbhost={{ wp_single.dbhost | default(wp_defaults.dbhost) }}
   args:
     chdir: "{{ wp_single.path }}"
-  when: wp_config_file.stat.exists == false
+  when: not wp_config_file.stat.exists
   become: yes
   become_user: "{{ server_user | default(wp_defaults.server_user) }}"
   tags:
