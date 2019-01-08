@@ -24,7 +24,7 @@
     state: directory
     mode: 0755
     owner: "{{ server_user | default(wp_defaults.server_user) }}"
-    group: "{{ server_group | default(wp_defaults.server_group) }}" 
+    group: "{{ server_group | default(wp_defaults.server_group) }}"
   tags:
     - wordpress-install
 
@@ -57,7 +57,7 @@
   command: "{{ wp_cli_command_name }} core download"
   args:
     chdir: "{{ wp_single.path }}"
-  when: wp_index_file.stat.exists == false
+  when: not wp_index_file.stat.exists
   become: yes
   become_user: "{{ server_user | default(wp_defaults.server_user) }}"
   tags:
